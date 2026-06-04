@@ -45,6 +45,8 @@ public class Main {
             System.out.println("7 - Vypsat všechny výpůjčky");
             System.out.println("8 - Vypsat celkový příjem");
             System.out.println("9 - Vypsat nejdražší výpůjčku");
+            System.out.println("10 - Vypsat Výpůjčky podle ID zákazníka.");
+            System.out.println("11 - Vrátit Vozidlo");
 
 
             try {
@@ -88,6 +90,12 @@ public class Main {
                     break;
                 case 9:
                     evidence.vypisNejdrazsiVypujcku();
+                    break;
+                case 10:
+                    evidence.vypisPujcekZakaznika(sc);
+                    break;
+                case 11:
+                    evidence.vratVozidlo(sc);
                     break;
                 default:
                     System.out.println("Neplatná volba.");

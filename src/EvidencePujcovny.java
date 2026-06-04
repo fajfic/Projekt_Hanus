@@ -158,4 +158,53 @@ public class EvidencePujcovny {
         System.out.println("--- Nejdražší výpůjčka ---");
         nejdrazsi.vypisInfo();
     }
+
+    //Vrácení Dopravního Prostředku
+
+    public void vratVozidlo(Scanner sc) {
+        System.out.println("Zadejte SPZ vozidla které chcete vrátit");
+        String spz = sc.nextLine().trim();
+        boolean nalezeno = false;
+        for (Vypujcka v : vypujcky) {
+            if (v.getProstredek().getSpz().equalsIgnoreCase(spz) && v.isPlatna() && !v.getProstredek().isDostupny()) {
+                v.getProstredek().setDostupny(true);
+                System.out.println("Vozidlo vráceno: "+spz);
+                nalezeno = true;
+                break;
+            }
+        }
+        if (!nalezeno) {
+            System.out.println("Vozidlo s SPZ: '"+spz+"' neexistuje.");
+        }
+    }
+
+    // Výpis výpůjček konkretního zákazníka
+    public void vypisPujcekZakaznika(Scanner sc){
+        System.out.println("Zadejte ID zákazníka.");
+        String id = sc.nextLine().trim();
+        Zakaznik hledany= null;
+        for (Zakaznik z:zakaznici){
+            if (z.getIdZakaznika().equals(id)) {
+                hledany = z;
+                break;
+            }
+        }
+        if (hledany == null) {
+            logger.warning("Zákazník s ID: '" +id+ "' Neexistuje");
+            return;
+        }
+        System.out.println("---Historie výpůjček zákazníka: "+hledany.getJmeno()+"---");
+        int pocet=0;
+        for (Vypujcka v : vypujcky) {
+            if (v.getZakaznik().getIdZakaznika().equalsIgnoreCase(id)){
+                v.vypisInfo();
+                pocet++;
+            }
+        }
+        if (pocet==0) {
+            System.out.println("Žádne dostupné půjčky");
+        }else
+            System.out.println("Celkem půjček: "+pocet+".");
+    }
+
 }

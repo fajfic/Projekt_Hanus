@@ -33,6 +33,8 @@ public class Vypujcka {
         return prostredek.vypoctiCenu(pocetDni);
     }
 
+
+
     public void vypisInfo() {
         if (!platna) {
             System.out.println("  [NEPLATNÁ výpůjčka – vozidlo nebylo dostupné]");
